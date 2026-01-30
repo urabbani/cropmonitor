@@ -1,0 +1,141 @@
+import { useState, useEffect } from 'react';
+import './App.css';
+import { Header } from '@/sections/Header';
+import { DashboardOverview } from '@/sections/DashboardOverview';
+import { GISMap } from '@/sections/GISMap';
+import { CropHealthMonitor } from '@/sections/CropHealthMonitor';
+import { SatelliteSources } from '@/sections/SatelliteSources';
+import { AnalyticsPanel } from '@/sections/AnalyticsPanel';
+import { AlertsPanel } from '@/sections/AlertsPanel';
+import { WeatherWidget } from '@/sections/WeatherWidget';
+import { FieldDetailModal } from '@/sections/FieldDetailModal';
+import { alerts as initialAlerts } from '@/data/mockData';
+import type { FieldData, Alert } from '@/types';
+import { Toaster } from '@/components/ui/sonner';
+
+function App() {
+  const [selectedField, setSelectedField] = useState<FieldData | null>(null);
+  const [alerts, setAlerts] = useState<Alert[]>(initialAlerts);
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate initial loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Simulate real-time alert updates
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Randomly mark alerts as read after some time
+      setAlerts(prev => prev.map(alert => 
+        !alert.read && Math.random() > 0.95 ? { ...alert, read: true } : alert
+      ));
+    }, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleFieldSelect = (field: FieldData) => {
+    setSelectedField(field);
+  };
+
+  const handleAlertDismiss = (alertId: string) => {
+    setAlerts(prev => prev.filter(a => a.id !== alertId));
+  };
+
+  const handleAlertRead = (alertId: string) => {
+    setAlerts(prev => prev.map(a => 
+      a.id === alertId ? { ...a, read: true } : a
+    ));
+  };
+
+  const unreadAlertsCount = alerts.filter(a => !a.read).length;
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="spinner mx-auto mb-4"></div>
+          <h2 className="text-xl font-semibold text-gray-700">Loading Sindh CropWatch...</h2>
+          <p className="text-sm text-gray-500 mt-2">Initializing GIS Dashboard</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <Header 
+        activeTab={activeTab} 
+        onTabChange={setActiveTab}
+        unreadAlertsCount={unreadAlertsCount}
+      />
+      
+      <main className="flex-1 p-4 lg:p-6 overflow-auto">
+        <div className="max-w-[1920px] mx-auto space-y-6">
+          {/* Dashboard Overview - KPI Cards */}
+          <DashboardOverview />
+          
+          {/* Main Content Grid */}
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+            {/* GIS Map - Takes up 2/3 on large screens */}
+            <div className="xl:col-span-2 space-y-6">
+              <GISMap onFieldSelect={handleFieldSelect} />
+              <CropHealthMonitor />
+              <SatelliteSources />
+            </div>
+            
+            {/* Sidebar - Takes up 1/3 on large screens */}
+            <div className="space-y-6">
+              <WeatherWidget />
+              <AlertsPanel 
+                alerts={alerts}
+                onDismiss={handleAlertDismiss}
+                onRead={handleAlertRead}
+              />
+              <AnalyticsPanel />
+            </div>
+          </div>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-white border-t border-gray-200 py-4 px-6">
+        <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-sm text-gray-500">
+            © 2025 Sindh CropWatch. All rights reserved.
+          </div>
+          <div className="flex items-center gap-6 text-sm text-gray-500">
+            <span>Powered by:</span>
+            <div className="flex items-center gap-4">
+              <span className="hover:text-primary-medium cursor-pointer transition-colors">NASA</span>
+              <span className="hover:text-primary-medium cursor-pointer transition-colors">ESA</span>
+              <span className="hover:text-primary-medium cursor-pointer transition-colors">USGS</span>
+              <span className="hover:text-primary-medium cursor-pointer transition-colors">Planet</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-4 text-sm">
+            <a href="#" className="text-gray-500 hover:text-primary-medium transition-colors">Privacy Policy</a>
+            <a href="#" className="text-gray-500 hover:text-primary-medium transition-colors">Terms</a>
+            <a href="#" className="text-gray-500 hover:text-primary-medium transition-colors">API Docs</a>
+          </div>
+        </div>
+      </footer>
+
+      {/* Field Detail Modal */}
+      {selectedField && (
+        <FieldDetailModal 
+          field={selectedField}
+          onClose={() => setSelectedField(null)}
+        />
+      )}
+
+      <Toaster position="top-right" />
+    </div>
+  );
+}
+
+export default App;
