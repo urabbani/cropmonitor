@@ -1,3 +1,8 @@
+# This workflow runs automatic Claude code reviews on PRs
+# REQUIREMENTS:
+# 1. Add ANTHROPIC_API_KEY secret in GitHub repository Settings > Secrets and variables > Actions
+# 2. Get your API key from https://console.anthropic.com/
+
 name: Claude Code Review
 
 on:
