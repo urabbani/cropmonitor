@@ -476,3 +476,109 @@ export const mapLayers = {
     { id: 'stress', name: 'Water Stress Index', visible: false, opacity: 0.8 }
   ]
 };
+
+// Available Satellite Dates for Sindh Province
+export const availableSatelliteDates = [
+  { date: '2024-11-01', sourceId: 'sentinel-2', sourceName: 'Sentinel-2', cloudCover: 5, available: true },
+  { date: '2024-11-06', sourceId: 'sentinel-2', sourceName: 'Sentinel-2', cloudCover: 12, available: true },
+  { date: '2024-11-11', sourceId: 'sentinel-2', sourceName: 'Sentinel-2', cloudCover: 3, available: true },
+  { date: '2024-11-16', sourceId: 'sentinel-2', sourceName: 'Sentinel-2', cloudCover: 25, available: false },
+  { date: '2024-11-21', sourceId: 'sentinel-2', sourceName: 'Sentinel-2', cloudCover: 8, available: true },
+  { date: '2024-11-26', sourceId: 'sentinel-2', sourceName: 'Sentinel-2', cloudCover: 2, available: true },
+  { date: '2024-12-01', sourceId: 'landsat', sourceName: 'Landsat 8/9', cloudCover: 10, available: true },
+  { date: '2024-12-06', sourceId: 'sentinel-2', sourceName: 'Sentinel-2', cloudCover: 15, available: true },
+  { date: '2024-12-11', sourceId: 'sentinel-2', sourceName: 'Sentinel-2', cloudCover: 4, available: true },
+  { date: '2024-12-16', sourceId: 'modis', sourceName: 'MODIS', cloudCover: 8, available: true },
+  { date: '2024-12-21', sourceId: 'sentinel-2', sourceName: 'Sentinel-2', cloudCover: 20, available: true },
+  { date: '2024-12-26', sourceId: 'sentinel-2', sourceName: 'Sentinel-2', cloudCover: 6, available: true },
+  { date: '2024-12-31', sourceId: 'landsat', sourceName: 'Landsat 8/9', cloudCover: 12, available: true },
+  { date: '2025-01-05', sourceId: 'sentinel-2', sourceName: 'Sentinel-2', cloudCover: 7, available: true },
+  { date: '2025-01-10', sourceId: 'modis', sourceName: 'MODIS', cloudCover: 5, available: true },
+  { date: '2025-01-15', sourceId: 'sentinel-2', sourceName: 'Sentinel-2', cloudCover: 3, available: true },
+  { date: '2025-01-20', sourceId: 'sentinel-2', sourceName: 'Sentinel-2', cloudCover: 18, available: true },
+  { date: '2025-01-26', sourceId: 'sentinel-2', sourceName: 'Sentinel-2', cloudCover: 4, available: true }
+];
+
+// Pre-calculated index results for demonstration
+export const indexResults = {
+  '2025-01-26': {
+    ndvi: { min: -0.15, max: 0.92, mean: 0.58, stdDev: 0.18, indexId: 'ndvi', indexName: 'NDVI' },
+    evi: { min: -0.22, max: 0.88, mean: 0.52, stdDev: 0.16, indexId: 'evi', indexName: 'EVI' },
+    ndwi: { min: -0.45, max: 0.65, mean: 0.12, stdDev: 0.22, indexId: 'ndwi', indexName: 'NDWI' },
+    savi: { min: -0.18, max: 0.85, mean: 0.54, stdDev: 0.17, indexId: 'savi', indexName: 'SAVI' },
+    msi: { min: 0.65, max: 2.45, mean: 1.32, stdDev: 0.35, indexId: 'msi', indexName: 'MSI' },
+    nbr: { min: -0.35, max: 0.78, mean: 0.42, stdDev: 0.19, indexId: 'nbr', indexName: 'NBR' },
+    lai: { min: 0.1, max: 5.8, mean: 3.2, stdDev: 1.1, indexId: 'lai', indexName: 'LAI' },
+    gndvi: { min: -0.12, max: 0.85, mean: 0.51, stdDev: 0.17, indexId: 'gndvi', indexName: 'GNDVI' }
+  },
+  '2025-01-15': {
+    ndvi: { min: -0.12, max: 0.88, mean: 0.55, stdDev: 0.17, indexId: 'ndvi', indexName: 'NDVI' },
+    evi: { min: -0.20, max: 0.85, mean: 0.49, stdDev: 0.15, indexId: 'evi', indexName: 'EVI' },
+    ndwi: { min: -0.42, max: 0.62, mean: 0.10, stdDev: 0.21, indexId: 'ndwi', indexName: 'NDWI' },
+    savi: { min: -0.15, max: 0.82, mean: 0.51, stdDev: 0.16, indexId: 'savi', indexName: 'SAVI' },
+    msi: { min: 0.70, max: 2.55, mean: 1.38, stdDev: 0.37, indexId: 'msi', indexName: 'MSI' },
+    nbr: { min: -0.32, max: 0.75, mean: 0.40, stdDev: 0.18, indexId: 'nbr', indexName: 'NBR' },
+    lai: { min: 0.1, max: 5.5, mean: 3.0, stdDev: 1.0, indexId: 'lai', indexName: 'LAI' },
+    gndvi: { min: -0.10, max: 0.82, mean: 0.48, stdDev: 0.16, indexId: 'gndvi', indexName: 'GNDVI' }
+  }
+};
+
+// Histogram data for NDVI visualization
+export function generateHistogramData(mean: number, stdDev: number): { value: number; count: number }[] {
+  const histogram: { value: number; count: number }[] = [];
+  for (let i = -2; i <= 10; i++) {
+    const value = i * 0.1;
+    const zScore = (value - mean) / stdDev;
+    const count = Math.max(0, Math.exp(-0.5 * zScore * zScore) * 1000 + Math.random() * 100);
+    histogram.push({ value, count: Math.round(count) });
+  }
+  return histogram;
+}
+
+// Sindh Province bounds for satellite imagery
+export const sindhBounds: [[number, number], [number, number], [number, number], [number, number]] = [
+  [23.7, 66.9],  // Southwest
+  [23.7, 71.2],  // Southeast
+  [28.5, 71.2],  // Northeast
+  [28.5, 66.9]   // Northwest
+];
+
+// Regions of interest for detailed analysis
+export const regionsOfInterest = [
+  {
+    id: 'indus-delta',
+    name: 'Indus River Delta',
+    bounds: [[23.5, 67.0], [23.5, 68.5], [24.5, 68.5], [24.5, 67.0]] as [[number, number], [number, number], [number, number], [number, number]],
+    area: 850000
+  },
+  {
+    id: 'thar-desert',
+    name: 'Thar Desert Region',
+    bounds: [[24.0, 69.5], [24.0, 71.0], [25.5, 71.0], [25.5, 69.5]] as [[number, number], [number, number], [number, number], [number, number]],
+    area: 1200000
+  },
+  {
+    id: 'rice-belt',
+    name: 'Rice Cultivation Belt',
+    bounds: [[26.5, 68.0], [26.5, 69.0], [27.5, 69.0], [27.5, 68.0]] as [[number, number], [number, number], [number, number], [number, number]],
+    area: 650000
+  }
+];
+
+// Temporal comparison data
+export const temporalComparisons = [
+  {
+    date1: '2025-01-15',
+    date2: '2025-01-26',
+    indexId: 'ndvi',
+    changeMap: [
+      { category: 'Significant Decline (>20%)', value: -20, area: 85000, color: '#dc2626' },
+      { category: 'Moderate Decline (10-20%)', value: -15, area: 120000, color: '#f97316' },
+      { category: 'Slight Decline (5-10%)', value: -7, area: 180000, color: '#fbbf24' },
+      { category: 'Stable (±5%)', value: 0, area: 1850000, color: '#d1d5db' },
+      { category: 'Slight Increase (5-10%)', value: 7, area: 320000, color: '#86efac' },
+      { category: 'Moderate Increase (10-20%)', value: 15, area: 150000, color: '#22c55e' },
+      { category: 'Significant Increase (>20%)', value: 25, area: 75000, color: '#15803d' }
+    ]
+  }
+];

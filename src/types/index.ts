@@ -154,3 +154,106 @@ export interface TimeSeriesData {
     fill?: boolean;
   }[];
 }
+
+// Satellite Imagery Types
+export interface SatelliteImage {
+  id: string;
+  sourceId: string;
+  sourceName: string;
+  date: string;
+  acquisitionTime: string;
+  cloudCover: number;
+  bounds: [[number, number], [number, number], [number, number], [number, number]];
+  resolution: number;
+  url?: string;
+  metadata: SatelliteMetadata;
+}
+
+export interface SatelliteMetadata {
+  product: string;
+  processingLevel: string;
+  bands: SpectralBand[];
+  sunElevation: number;
+  sunAzimuth: number;
+  sensor: string;
+}
+
+export interface SpectralBand {
+  id: string;
+  name: string;
+  wavelength: string;
+  resolution: number;
+  description: string;
+}
+
+export interface VegetationIndexConfig {
+  id: string;
+  name: string;
+  formula: string;
+  description: string;
+  range: [number, number];
+  colorScale: ColorScaleStop[];
+  unit: string;
+}
+
+export interface ColorScaleStop {
+  value: number;
+  color: string;
+  label: string;
+}
+
+export interface IndexCalculationResult {
+  indexId: string;
+  indexName: string;
+  date: string;
+  min: number;
+  max: number;
+  mean: number;
+  stdDev: number;
+  histogram: HistogramData[];
+  imageUrl?: string;
+}
+
+export interface HistogramData {
+  value: number;
+  count: number;
+}
+
+export interface TemporalComparison {
+  date1: string;
+  date2: string;
+  indexId: string;
+  differenceUrl?: string;
+  changeMap: ChangeMapData[];
+}
+
+export interface ChangeMapData {
+  category: string;
+  value: number;
+  area: number;
+  color: string;
+}
+
+export interface AvailableSatelliteDate {
+  date: string;
+  sourceId: string;
+  sourceName: string;
+  cloudCover: number;
+  available: boolean;
+}
+
+export interface RegionOfInterest {
+  id: string;
+  name: string;
+  bounds: [[number, number], [number, number], [number, number], [number, number]];
+  area: number;
+}
+
+export interface BandCombination {
+  id: string;
+  name: string;
+  redBand: string;
+  greenBand: string;
+  blueBand: string;
+  description: string;
+}

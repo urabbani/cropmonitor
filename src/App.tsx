@@ -5,6 +5,7 @@ import { DashboardOverview } from '@/sections/DashboardOverview';
 import { GISMap } from '@/sections/GISMap';
 import { CropHealthMonitor } from '@/sections/CropHealthMonitor';
 import { SatelliteSources } from '@/sections/SatelliteSources';
+import { SatelliteImageryViewer } from '@/sections/SatelliteImageryViewer';
 import { AnalyticsPanel } from '@/sections/AnalyticsPanel';
 import { AlertsPanel } from '@/sections/AlertsPanel';
 import { WeatherWidget } from '@/sections/WeatherWidget';
@@ -78,20 +79,21 @@ function App() {
         <div className="max-w-[1920px] mx-auto space-y-6">
           {/* Dashboard Overview - KPI Cards */}
           <DashboardOverview />
-          
+
           {/* Main Content Grid */}
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
             {/* GIS Map - Takes up 2/3 on large screens */}
             <div className="xl:col-span-2 space-y-6">
               <GISMap onFieldSelect={handleFieldSelect} />
+              <SatelliteImageryViewer />
               <CropHealthMonitor />
               <SatelliteSources />
             </div>
-            
+
             {/* Sidebar - Takes up 1/3 on large screens */}
             <div className="space-y-6">
               <WeatherWidget />
-              <AlertsPanel 
+              <AlertsPanel
                 alerts={alerts}
                 onDismiss={handleAlertDismiss}
                 onRead={handleAlertRead}
