@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 "use client"
 
 import * as React from "react"
@@ -599,6 +600,12 @@ function SidebarMenuBadge({
   )
 }
 
+// Pre-generated random widths for skeleton loading animation
+const skeletonWidths = Array.from({ length: 20 }, () =>
+  `${Math.floor(Math.random() * 40) + 50}%`
+);
+let skeletonWidthIndex = 0;
+
 function SidebarMenuSkeleton({
   className,
   showIcon = false,
@@ -606,9 +613,11 @@ function SidebarMenuSkeleton({
 }: React.ComponentProps<"div"> & {
   showIcon?: boolean
 }) {
-  // Random width between 50 to 90%.
+  // Deterministic width based on incrementing index
   const width = React.useMemo(() => {
-    return `${Math.floor(Math.random() * 40) + 50}%`
+    const width = skeletonWidths[skeletonWidthIndex % skeletonWidths.length];
+    skeletonWidthIndex++;
+    return width;
   }, [])
 
   return (

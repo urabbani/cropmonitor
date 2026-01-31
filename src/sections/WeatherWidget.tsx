@@ -37,8 +37,15 @@ const weatherIcons: Record<string, React.ElementType> = {
   'Thunderstorm': CloudLightning
 };
 
-function getWeatherIcon(condition: string) {
-  return weatherIcons[condition] || Sun;
+interface WeatherIconProps {
+  condition: string;
+  className?: string;
+}
+
+// Component declared outside render to satisfy react-hooks/static-components
+function WeatherIconComponent({ condition, className }: WeatherIconProps) {
+  const IconComponent = weatherIcons[condition] || Sun;
+  return <IconComponent className={className} />;
 }
 
 function getWeatherColor(condition: string): string {
@@ -82,7 +89,6 @@ export function WeatherWidget() {
   };
 
   const { current, forecast } = weatherData;
-  const WeatherIcon = getWeatherIcon(current.condition);
 
   return (
     <Card 
@@ -141,7 +147,7 @@ export function WeatherWidget() {
         {/* Main Weather Display */}
         <div className="text-center mb-6">
           <div className={`inline-flex p-4 rounded-2xl mb-3 ${getWeatherColor(current.condition)}`}>
-            <WeatherIcon className="w-12 h-12" />
+            <WeatherIconComponent condition={current.condition} className="w-12 h-12" />
           </div>
           <div className="flex items-start justify-center gap-1">
             <span className="text-5xl font-bold text-gray-900">{current.temperature}</span>
@@ -216,17 +222,16 @@ export function WeatherWidget() {
           
           <div className="space-y-2">
             {forecast.slice(0, expanded ? 5 : 3).map((day, index) => {
-              const DayIcon = getWeatherIcon(day.condition);
               const date = new Date(day.date);
               const dayName = index === 0 ? 'Today' : date.toLocaleDateString('en-US', { weekday: 'short' });
-              
+
               return (
-                <div 
-                  key={day.date} 
+                <div
+                  key={day.date}
                   className="flex items-center justify-between p-2 hover:bg-gray-50 rounded-lg transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <DayIcon className="w-5 h-5 text-gray-500" />
+                    <WeatherIconComponent condition={day.condition} className="w-5 h-5 text-gray-500" />
                     <span className="text-sm font-medium text-gray-700 w-12">{dayName}</span>
                   </div>
                   <div className="flex items-center gap-4">
