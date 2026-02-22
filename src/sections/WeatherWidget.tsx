@@ -37,7 +37,7 @@ const weatherIcons: Record<string, React.ElementType> = {
   'Thunderstorm': CloudLightning
 };
 
-function getWeatherIcon(condition: string) {
+function getWeatherIcon(condition: string): React.ElementType {
   return weatherIcons[condition] || Sun;
 }
 
@@ -82,7 +82,7 @@ export function WeatherWidget() {
   };
 
   const { current, forecast } = weatherData;
-  const WeatherIcon = getWeatherIcon(current.condition);
+  const WeatherIcon = weatherIcons[current.condition] || Sun;
 
   return (
     <Card 

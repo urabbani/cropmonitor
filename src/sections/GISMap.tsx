@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { MapContainer, TileLayer, Polygon, Popup, LayerGroup, CircleMarker, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { 
@@ -24,7 +24,7 @@ import type { FieldData } from '@/types';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
-let DefaultIcon = L.icon({
+const DefaultIcon = L.icon({
   iconUrl: icon,
   shadowUrl: iconShadow,
   iconSize: [25, 41],
@@ -100,7 +100,7 @@ export function GISMap({ onFieldSelect }: GISMapProps) {
   const mapRef = useRef<L.Map | null>(null);
 
   // Timeline dates
-  const timelineDates = ['2025-01-20', '2025-01-22', '2025-01-24', '2025-01-26'];
+  const timelineDates = useMemo(() => ['2025-01-20', '2025-01-22', '2025-01-24', '2025-01-26'], []);
   const [currentTimelineIndex, setCurrentTimelineIndex] = useState(3);
 
   // Auto-play timeline
@@ -118,7 +118,7 @@ export function GISMap({ onFieldSelect }: GISMapProps) {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isPlaying]);
+  }, [isPlaying, timelineDates]);
 
   const toggleLayer = (layerId: string) => {
     setActiveLayers(prev => ({
