@@ -1,13 +1,13 @@
-# Sindh CropWatch
+# Saudi AgriDrought Warning System (SAWS)
 
-An agricultural monitoring dashboard for the Sindh province of Pakistan, providing GIS visualization, satellite data integration, crop health monitoring, and real-time alerts for agricultural management.
+An agricultural drought monitoring dashboard for the Eastern Province of Saudi Arabia, providing GIS visualization, satellite data integration, crop health monitoring, and real-time alerts for agricultural management.
 
 ![Version](https://img.shields.io/badge/version-0.1.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## Overview
 
-Sindh CropWatch helps agricultural professionals monitor crop conditions across Sindh province through an intuitive web interface. The dashboard integrates satellite imagery, weather data, and field-level analytics to support data-driven agricultural decisions.
+Saudi AgriDrought Warning System (SAWS) helps agricultural professionals monitor crop conditions and drought indicators across Eastern Province, Saudi Arabia through an intuitive web interface. The dashboard integrates satellite imagery, weather data, and field-level analytics to support data-driven agricultural decisions.
 
 ## Features
 
@@ -39,8 +39,8 @@ Sindh CropWatch helps agricultural professionals monitor crop conditions across 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/urabbani/cropmonitor.git
-cd cropmonitor
+git clone https://github.com/urabbani/saws-saudi.git
+cd saws-saudi
 ```
 
 2. Install dependencies:
@@ -57,7 +57,7 @@ Start the development server with hot module replacement:
 npm run dev
 ```
 
-The application will be available at `http://localhost:5173`
+The application will be available at `http://localhost:3000`
 
 ### Production Build
 
@@ -86,10 +86,16 @@ npm run lint
 
 - **Frontend** - React 19 with TypeScript
 - **Build Tool** - Vite 7
-- **Styling** - Tailwind CSS
+- **Styling** - Tailwind CSS with desert theme
 - **Maps** - Leaflet with React Leaflet
 - **Charts** - Chart.js and Recharts
 - **UI Components** - Shadcn/ui (Radix UI)
+
+## Geographic Coverage
+
+- **Region**: Eastern Province, Saudi Arabia
+- **Coverage Area**: Dammam, Al Khobar, Dhahran, Qatif, Al Hofuf, Al Jubail
+- **Coordinate Bounds**: 25.5°N to 27.5°N, 49.0°E to 51.0°E
 
 ## Browser Support
 
@@ -104,7 +110,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Support
 
-For issues, questions, or suggestions, please [open an issue](https://github.com/urabbani/cropmonitor/issues) on GitHub.
+For issues, questions, or suggestions, please [open an issue](https://github.com/urabbani/saws-saudi/issues) on GitHub.
 
 ## License
 
@@ -118,4 +124,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-[View on GitHub](https://github.com/urabbani/cropmonitor) | [Report Issues](https://github.com/urabbani/cropmonitor/issues)
+[View on GitHub](https://github.com/urabbani/saws-saudi) | [Report Issues](https://github.com/urabbani/saws-saudi/issues)

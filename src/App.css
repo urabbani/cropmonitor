@@ -126,22 +126,22 @@
 }
 
 .status-dot.active {
-  background-color: #22c55e;
+  background-color: #d4a574;
 }
 
 .status-dot.active::after {
-  background-color: rgba(34, 197, 94, 0.3);
+  background-color: rgba(212, 165, 116, 0.3);
 }
 
 /* NDVI color scale */
 .ndvi-scale {
-  background: linear-gradient(to right, 
+  background: linear-gradient(to right,
     #8b4513 0%,
     #d2b48c 20%,
-    #ffffcc 40%,
-    #c6e090 60%,
-    #38a800 80%,
-    #006100 100%
+    #f4a460 40%,
+    #e8c4a0 60%,
+    #d4a574 80%,
+    #c4956a 100%
   );
 }
 
@@ -162,7 +162,7 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #2d8a57;
+  background: #c4956a;
   cursor: pointer;
   border: 2px solid white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -172,7 +172,7 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #2d8a57;
+  background: #c4956a;
   cursor: pointer;
   border: 2px solid white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -181,7 +181,7 @@
 /* Loading spinner */
 .spinner {
   border: 3px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #2d8a57;
+  border-left-color: #c4956a;
   border-radius: 50%;
   width: 24px;
   height: 24px;
@@ -210,8 +210,8 @@
 }
 
 .layer-control-item.active {
-  background-color: #f0fdf4;
-  border: 1px solid #bbf7d0;
+  background-color: #fdf6e3;
+  border: 1px solid #e8c4a0;
 }
 
 /* Print styles */

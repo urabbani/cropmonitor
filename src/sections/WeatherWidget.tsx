@@ -22,11 +22,11 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 const locations = [
-  { id: 'hyderabad', name: 'Hyderabad' },
-  { id: 'karachi', name: 'Karachi' },
-  { id: 'sukkur', name: 'Sukkur' },
-  { id: 'larkana', name: 'Larkana' },
-  { id: 'mirpurkhas', name: 'Mirpurkhas' }
+  { id: 'dammam', name: 'Dammam' },
+  { id: 'alkhobar', name: 'Al Khobar' },
+  { id: 'hofuf', name: 'Al Hofuf' },
+  { id: 'qatif', name: 'Qatif' },
+  { id: 'jubail', name: 'Al Jubail' }
 ];
 
 const weatherIcons: Record<string, React.ElementType> = {
@@ -85,44 +85,45 @@ export function WeatherWidget() {
   const WeatherIcon = weatherIcons[current.condition] || Sun;
 
   return (
-    <Card 
+    <Card
       ref={sectionRef}
       className={`border border-gray-200 overflow-hidden ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
     >
       {/* Header */}
-      <div className="p-4 border-b border-gray-100">
+      <div className="p-3 border-b border-gray-100">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-50 rounded-lg">
-              <Cloud className="w-5 h-5 text-blue-600" />
+          <div className="flex items-center gap-2">
+            <div className="p-1.5 bg-blue-50 rounded-lg">
+              <Cloud className="w-4 h-4 text-blue-600" />
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900">Weather</h3>
+              <h3 className="font-semibold text-gray-900 text-sm">Weather</h3>
               <p className="text-xs text-gray-500">Agricultural forecasts</p>
             </div>
           </div>
-          <Button 
-            variant="ghost" 
+          <Button
+            variant="ghost"
             size="icon"
             onClick={handleRefresh}
             disabled={isRefreshing}
+            className="h-7 w-7"
           >
-            <RefreshCw className={`w-4 h-4 text-gray-500 ${isRefreshing ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`w-3 h-3 text-gray-500 ${isRefreshing ? 'animate-spin' : ''}`} />
           </Button>
         </div>
       </div>
 
       {/* Current Weather */}
-      <div className="p-4">
+      <div className="p-3">
         {/* Location Selector */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="w-full justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-gray-400" />
+            <Button variant="outline" className="w-full justify-between mb-3 h-8 text-xs">
+              <div className="flex items-center gap-1.5">
+                <MapPin className="w-3 h-3 text-gray-400" />
                 <span>{selectedLocation.name}</span>
               </div>
-              <ChevronDown className="w-4 h-4 text-gray-400" />
+              <ChevronDown className="w-3 h-3 text-gray-400" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-full">
@@ -139,62 +140,54 @@ export function WeatherWidget() {
         </DropdownMenu>
 
         {/* Main Weather Display */}
-        <div className="text-center mb-6">
-          <div className={`inline-flex p-4 rounded-2xl mb-3 ${getWeatherColor(current.condition)}`}>
-            <WeatherIcon className="w-12 h-12" />
+        <div className="text-center mb-4">
+          <div className={`inline-flex p-2 rounded-xl mb-2 ${getWeatherColor(current.condition)}`}>
+            <WeatherIcon className="w-8 h-8" />
           </div>
           <div className="flex items-start justify-center gap-1">
-            <span className="text-5xl font-bold text-gray-900">{current.temperature}</span>
-            <span className="text-2xl text-gray-500 mt-1">°C</span>
+            <span className="text-3xl font-bold text-gray-900">{current.temperature}</span>
+            <span className="text-lg text-gray-500 mt-0.5">°C</span>
           </div>
-          <p className="text-lg text-gray-600 mt-1">{current.condition}</p>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-600 mt-0.5">{current.condition}</p>
+          <p className="text-xs text-gray-400">
             Feels like {current.temperature + 2}°C
           </p>
         </div>
 
         {/* Weather Details Grid */}
-        <div className="grid grid-cols-2 gap-3 mb-4">
-          <div className="p-3 bg-gray-50 rounded-xl">
-            <div className="flex items-center gap-2 mb-1">
-              <Droplets className="w-4 h-4 text-blue-500" />
-              <span className="text-xs text-gray-500">Humidity</span>
-            </div>
-            <p className="text-lg font-semibold text-gray-900">{current.humidity}%</p>
+        <div className="grid grid-cols-4 gap-2 mb-3">
+          <div className="p-2 bg-gray-50 rounded-lg text-center">
+            <Droplets className="w-3 h-3 text-blue-500 mx-auto mb-1" />
+            <p className="text-xs font-semibold text-gray-900">{current.humidity}%</p>
+            <p className="text-xs text-gray-400">Humidity</p>
           </div>
-          <div className="p-3 bg-gray-50 rounded-xl">
-            <div className="flex items-center gap-2 mb-1">
-              <Wind className="w-4 h-4 text-cyan-500" />
-              <span className="text-xs text-gray-500">Wind</span>
-            </div>
-            <p className="text-lg font-semibold text-gray-900">{current.windSpeed} km/h</p>
+          <div className="p-2 bg-gray-50 rounded-lg text-center">
+            <Wind className="w-3 h-3 text-cyan-500 mx-auto mb-1" />
+            <p className="text-xs font-semibold text-gray-900">{current.windSpeed}</p>
+            <p className="text-xs text-gray-400">km/h</p>
           </div>
-          <div className="p-3 bg-gray-50 rounded-xl">
-            <div className="flex items-center gap-2 mb-1">
-              <Umbrella className="w-4 h-4 text-purple-500" />
-              <span className="text-xs text-gray-500">Precipitation</span>
-            </div>
-            <p className="text-lg font-semibold text-gray-900">{current.precipitation} mm</p>
+          <div className="p-2 bg-gray-50 rounded-lg text-center">
+            <Umbrella className="w-3 h-3 text-purple-500 mx-auto mb-1" />
+            <p className="text-xs font-semibold text-gray-900">{current.precipitation}</p>
+            <p className="text-xs text-gray-400">mm</p>
           </div>
-          <div className="p-3 bg-gray-50 rounded-xl">
-            <div className="flex items-center gap-2 mb-1">
-              <Sun className="w-4 h-4 text-amber-500" />
-              <span className="text-xs text-gray-500">UV Index</span>
-            </div>
-            <p className="text-lg font-semibold text-gray-900">{current.uvIndex}/10</p>
+          <div className="p-2 bg-gray-50 rounded-lg text-center">
+            <Sun className="w-3 h-3 text-amber-500 mx-auto mb-1" />
+            <p className="text-xs font-semibold text-gray-900">{current.uvIndex}</p>
+            <p className="text-xs text-gray-400">UV</p>
           </div>
         </div>
 
         {/* Agricultural Metrics */}
-        <div className="p-3 bg-green-50 rounded-xl mb-4">
-          <p className="text-xs font-medium text-green-700 mb-2">Agricultural Metrics</p>
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-sm">
+        <div className="p-2 bg-green-50 rounded-lg mb-3">
+          <p className="text-xs font-medium text-green-700 mb-1.5">Agricultural Metrics</p>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="flex items-center justify-between text-xs">
               <span className="text-gray-600">Evapotranspiration</span>
               <span className="font-medium text-gray-900">4.2 mm/day</span>
             </div>
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-600">Soil Temperature</span>
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-gray-600">Soil Temp</span>
               <span className="font-medium text-gray-900">26°C</span>
             </div>
           </div>
@@ -202,42 +195,36 @@ export function WeatherWidget() {
 
         {/* 5-Day Forecast */}
         <div>
-          <div className="flex items-center justify-between mb-3">
-            <p className="text-sm font-medium text-gray-700">5-Day Forecast</p>
-            <Button 
-              variant="ghost" 
-              size="sm" 
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-xs font-medium text-gray-700">5-Day Forecast</p>
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={() => setExpanded(!expanded)}
-              className="text-xs"
+              className="text-xs h-6 px-2"
             >
-              {expanded ? 'Show Less' : 'Show More'}
+              {expanded ? 'Less' : 'More'}
             </Button>
           </div>
-          
-          <div className="space-y-2">
+
+          <div className="space-y-1">
             {forecast.slice(0, expanded ? 5 : 3).map((day, index) => {
               const DayIcon = getWeatherIcon(day.condition);
               const date = new Date(day.date);
               const dayName = index === 0 ? 'Today' : date.toLocaleDateString('en-US', { weekday: 'short' });
-              
+
               return (
-                <div 
-                  key={day.date} 
-                  className="flex items-center justify-between p-2 hover:bg-gray-50 rounded-lg transition-colors"
+                <div
+                  key={day.date}
+                  className="flex items-center justify-between p-1.5 hover:bg-gray-50 rounded-lg transition-colors"
                 >
-                  <div className="flex items-center gap-3">
-                    <DayIcon className="w-5 h-5 text-gray-500" />
-                    <span className="text-sm font-medium text-gray-700 w-12">{dayName}</span>
+                  <div className="flex items-center gap-2">
+                    <DayIcon className="w-4 h-4 text-gray-500" />
+                    <span className="text-xs font-medium text-gray-700 w-10">{dayName}</span>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-1">
-                      <Droplets className="w-3 h-3 text-blue-400" />
-                      <span className="text-xs text-gray-500">{day.precipitationChance}%</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-gray-900">{day.high}°</span>
-                      <span className="text-sm text-gray-400">{day.low}°</span>
-                    </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-semibold text-gray-900 w-6 text-right">{day.high}°</span>
+                    <span className="text-xs text-gray-400 w-6 text-right">{day.low}°</span>
                   </div>
                 </div>
               );

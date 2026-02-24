@@ -26,35 +26,35 @@ import {
 } from 'recharts';
 import { analyticsData } from '@/data/mockData';
 
-function MetricCard({ 
-  title, 
-  value, 
-  target, 
-  icon: Icon, 
-  trend, 
-  color 
-}: { 
-  title: string; 
-  value: string; 
+function MetricCard({
+  title,
+  value,
+  target,
+  icon: Icon,
+  trend,
+  color
+}: {
+  title: string;
+  value: string;
   target: string;
   icon: React.ElementType;
   trend: 'up' | 'down' | 'neutral';
   color: string;
 }) {
   const percentage = parseInt(value);
-  
+
   return (
-    <div className="p-4 bg-gray-50 rounded-xl">
-      <div className="flex items-start justify-between mb-3">
-        <div className={`p-2 rounded-lg ${color}`}>
-          <Icon className="w-4 h-4" />
+    <div className="p-2 bg-gray-50 rounded-lg">
+      <div className="flex items-start justify-between mb-1">
+        <div className={`p-1 rounded ${color}`}>
+          <Icon className="w-3 h-3" />
         </div>
-        {trend === 'up' && <TrendingUp className="w-4 h-4 text-green-500" />}
-        {trend === 'down' && <TrendingDown className="w-4 h-4 text-red-500" />}
+        {trend === 'up' && <TrendingUp className="w-3 h-3 text-green-500" />}
+        {trend === 'down' && <TrendingDown className="w-3 h-3 text-red-500" />}
       </div>
-      <p className="text-xs text-gray-500 mb-1">{title}</p>
-      <p className="text-xl font-bold text-gray-900 mb-2">{value}</p>
-      <Progress value={percentage} className="h-1.5 mb-1" />
+      <p className="text-xs text-gray-500 mb-0.5 truncate">{title}</p>
+      <p className="text-sm font-bold text-gray-900 mb-1">{value}</p>
+      <Progress value={percentage} className="h-1 mb-0.5" />
       <p className="text-xs text-gray-400">Target: {target}</p>
     </div>
   );
@@ -101,73 +101,72 @@ export function AnalyticsPanel() {
   }));
 
   return (
-    <Card 
+    <Card
       ref={sectionRef}
       className={`border border-gray-200 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
     >
       {/* Header */}
-      <div className="p-4 border-b border-gray-100">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-purple-50 rounded-lg">
-              <BarChart3 className="w-5 h-5 text-purple-600" />
+      <div className="p-3 border-b border-gray-100">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <div className="p-1.5 bg-purple-50 rounded-lg">
+              <BarChart3 className="w-4 h-4 text-purple-600" />
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900">Analytics</h3>
-              <p className="text-xs text-gray-500">Crop trends and predictions</p>
+              <h3 className="font-semibold text-gray-900 text-sm">Analytics</h3>
+              <p className="text-xs text-gray-500">Crop trends & predictions</p>
             </div>
           </div>
-          <Button variant="outline" size="sm" className="flex items-center gap-2">
-            <Download className="w-4 h-4" />
-            <span className="hidden sm:inline">Export</span>
+          <Button variant="outline" size="icon" className="h-7 w-7">
+            <Download className="w-3 h-3" />
           </Button>
         </div>
 
         {/* Chart Tabs */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <button
             onClick={() => setActiveChart('area')}
             className={`
-              px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-              ${activeChart === 'area' 
-                ? 'bg-gray-900 text-white' 
+              px-2 py-1 rounded-md text-xs font-medium transition-all
+              ${activeChart === 'area'
+                ? 'bg-gray-900 text-white'
                 : 'text-gray-600 hover:bg-gray-100'
               }
             `}
           >
-            Crop Area Trends
+            Area Trends
           </button>
           <button
             onClick={() => setActiveChart('yield')}
             className={`
-              px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-              ${activeChart === 'yield' 
-                ? 'bg-gray-900 text-white' 
+              px-2 py-1 rounded-md text-xs font-medium transition-all
+              ${activeChart === 'yield'
+                ? 'bg-gray-900 text-white'
                 : 'text-gray-600 hover:bg-gray-100'
               }
             `}
           >
-            Yield Prediction
+            Yield
           </button>
         </div>
       </div>
 
-      <div className="p-4">
+      <div className="p-3">
         {/* Chart */}
-        <div className="h-[250px] mb-6">
+        <div className="h-[180px] mb-4">
           {activeChart === 'area' ? (
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={areaTrendData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
-                <XAxis 
-                  dataKey="year" 
+                <XAxis
+                  dataKey="year"
                   stroke="#9ca3af"
-                  fontSize={12}
+                  fontSize={11}
                   tickLine={false}
                 />
-                <YAxis 
+                <YAxis
                   stroke="#9ca3af"
-                  fontSize={12}
+                  fontSize={11}
                   tickLine={false}
                   tickFormatter={(value) => `${value}k`}
                 />
@@ -176,7 +175,8 @@ export function AnalyticsPanel() {
                     backgroundColor: 'white',
                     border: '1px solid #e5e5e5',
                     borderRadius: '8px',
-                    boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)'
+                    boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)',
+                    fontSize: '11px'
                   }}
                   formatter={(value: number) => [`${value.toFixed(0)}k ha`, '']}
                 />
@@ -196,15 +196,15 @@ export function AnalyticsPanel() {
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
-                <XAxis 
-                  dataKey="month" 
+                <XAxis
+                  dataKey="month"
                   stroke="#9ca3af"
-                  fontSize={12}
+                  fontSize={11}
                   tickLine={false}
                 />
-                <YAxis 
+                <YAxis
                   stroke="#9ca3af"
-                  fontSize={12}
+                  fontSize={11}
                   tickLine={false}
                   domain={[0, 6]}
                 />
@@ -213,7 +213,8 @@ export function AnalyticsPanel() {
                     backgroundColor: 'white',
                     border: '1px solid #e5e5e5',
                     borderRadius: '8px',
-                    boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)'
+                    boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)',
+                    fontSize: '11px'
                   }}
                   formatter={(value: number) => [`${value.toFixed(1)} t/ha`, '']}
                 />
@@ -250,9 +251,9 @@ export function AnalyticsPanel() {
         </div>
 
         {/* Key Metrics */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 gap-2">
           <MetricCard
-            title="Irrigation Eff."
+            title="Irrigation"
             value="73%"
             target="80%"
             icon={Droplets}
@@ -278,21 +279,21 @@ export function AnalyticsPanel() {
         </div>
 
         {/* Quick Stats */}
-        <div className="mt-4 pt-4 border-t border-gray-100">
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-500">Total Monitored Area</span>
-            <span className="font-semibold text-gray-900">2.84M hectares</span>
+        <div className="mt-3 pt-3 border-t border-gray-100">
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-gray-500">Total Area</span>
+            <span className="font-semibold text-gray-900">2.84M ha</span>
           </div>
-          <div className="flex items-center justify-between text-sm mt-2">
-            <span className="text-gray-500">Expected Yield (Current Season)</span>
+          <div className="flex items-center justify-between text-xs mt-1">
+            <span className="text-gray-500">Expected Yield</span>
             <span className="font-semibold text-gray-900">4.5 t/ha</span>
           </div>
         </div>
 
         {/* View More Link */}
-        <Button variant="ghost" className="w-full mt-4 text-primary-medium hover:text-primary-dark">
+        <Button variant="ghost" className="w-full mt-3 text-xs text-primary-medium py-1">
           View Detailed Analytics
-          <ArrowRight className="w-4 h-4 ml-2" />
+          <ArrowRight className="w-3 h-3 ml-1" />
         </Button>
       </div>
     </Card>

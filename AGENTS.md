@@ -4,7 +4,7 @@ This file provides guidance to AI agents when working with code in this reposito
 
 ## Project Overview
 
-**Sindh CropWatch** is a React-based agricultural monitoring dashboard for the Sindh province of Pakistan. It provides GIS visualization, satellite data integration, crop health monitoring, and real-time alerts for agricultural management.
+**Saudi AgriDrought Warning System (SAWS)** is a React-based agricultural drought monitoring dashboard for the Eastern Province of Saudi Arabia. It provides GIS visualization, satellite data integration, crop health monitoring, and real-time alerts for agricultural management.
 
 ## Development Commands
 
@@ -29,7 +29,7 @@ npm run preview
 
 - **Frontend**: React 19.2.0 with TypeScript
 - **Build**: Vite 7.2.4
-- **Styling**: Tailwind CSS with custom design system
+- **Styling**: Tailwind CSS with custom desert theme design system
 - **UI Components**: Shadcn/ui (Radix UI primitives)
 - **Maps**: Leaflet 1.9.4 + React Leaflet 5.0.0
 - **Charts**: Chart.js 4.5.1 + Recharts 2.15.4
@@ -43,10 +43,10 @@ npm run preview
 ```
 src/
 ├── components/ui/     # Shadcn/ui components (50+ reusable components)
-├── sections/          # Main dashboard sections (9 major feature components)
+├── sections/          # Main dashboard sections (major feature components)
 │   ├── Header.tsx
 │   ├── DashboardOverview.tsx
-│   ├── GISMap.tsx
+│   ├── UnifiedMapViewer.tsx
 │   ├── CropHealthMonitor.tsx
 │   ├── SatelliteSources.tsx
 │   ├── AlertsPanel.tsx
@@ -73,7 +73,7 @@ The dashboard follows a section-based architecture where each major feature is a
 
 - **Header** (`Header.tsx`): Navigation tabs, notifications badge, user menu
 - **DashboardOverview** (`DashboardOverview.tsx`): KPI cards with sparklines and trend indicators
-- **GISMap** (`GISMap.tsx`): Interactive Leaflet map with field polygons, markers, and layer controls
+- **UnifiedMapViewer** (`UnifiedMapViewer.tsx`): Combined GIS Map and Satellite Imagery with tab switching
 - **CropHealthMonitor** (`CropHealthMonitor.tsx`): NDVI/EVI/NDWI vegetation indices display
 - **SatelliteSources** (`SatelliteSources.tsx`): Multi-source satellite data status (MODIS, Sentinel-1/2, Landsat, Planet)
 - **AlertsPanel** (`AlertsPanel.tsx`): Priority-based alert system with read/unread states
@@ -97,7 +97,7 @@ Alerts are simulated to update in real-time via `setInterval` every 30 seconds.
 2. All types are defined in `/src/types/index.ts`
 3. Sections import data directly from mockData (no API layer yet)
 4. Alerts simulate real-time updates via `setInterval` in App.tsx
-5. Field selection flows from GISMap → App.tsx → FieldDetailModal
+5. Field selection flows from UnifiedMapViewer → App.tsx → FieldDetailModal
 
 ### Type System
 
@@ -115,11 +115,12 @@ Comprehensive TypeScript interfaces in `/src/types/index.ts` cover:
 
 ### Design System
 
-Custom color palette in `App.css`:
-- Agricultural crop colors: wheat (yellow), rice (cyan), cotton (gray/white), sugarcane (green)
-- NDVI gradient scale for vegetation health mapping
-- Dark mode CSS variables for theming
-- Custom animations defined in Tailwind config
+Custom color palette in `tailwind.config.js`:
+- Desert theme colors: dark brown (#8b5a2b), medium tan (#d4a574), light tan (#e8c4a0), cream (#fdf6e3)
+- Agricultural crop colors: dates (desert gold), wheat (yellow), tomatoes (red), alfalfa (light green)
+- NDVI gradient scale for vegetation health mapping (desert-appropriate)
+- Glassmorphism effect with semi-transparent cards (rgba(255, 255, 255, 0.50))
+- Background image from `/public/background.jpg`
 
 UI Components follow Shadcn/ui patterns:
 - Components use `cn()` utility for conditional class merging
@@ -147,6 +148,10 @@ The map uses React Leaflet with:
 - Click interactions to open field detail modals
 - Alert locations shown as markers
 - Custom marker icons using Leaflet's `L.divIcon`
+
+**Geographic Coverage**: Eastern Province, Saudi Arabia
+- Bounds: [25.5, 49.0] to [27.5, 51.0] (Dammam region)
+- Districts: Dammam, Al Khobar, Dhahran, Qatif, Al Hofuf, Al Jubail
 
 **Important**: Leaflet CSS must be imported for map tiles to display correctly. Import in `main.tsx`:
 ```typescript
@@ -208,6 +213,7 @@ toast.error('Failed to load data');
 - The `cn()` utility in `lib/utils.ts` merges Tailwind classes for dynamic styling
 - All sections are responsive and work on mobile, tablet, and desktop
 - The footer includes links to satellite data providers (NASA, ESA, USGS, Planet)
+- The server is configured for WSL access on `0.0.0.0:3000`
 
 ## Common Patterns
 

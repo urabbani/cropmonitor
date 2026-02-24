@@ -99,45 +99,45 @@ function SatelliteCard({ source, onClick, delay }: SatelliteCardProps) {
       style={{ animationDelay: `${delay * 0.1}s` }}
       onClick={onClick}
     >
-      <Card className="p-4 card-hover border border-gray-100 cursor-pointer h-full">
-        <div className="flex items-start justify-between mb-3">
-          <div className={`p-2.5 rounded-xl ${status.bgColor}`}>
-            <Icon className={`w-5 h-5 ${status.color}`} />
+      <Card className="p-2 card-hover border border-gray-100 cursor-pointer">
+        <div className="flex items-start justify-between mb-1">
+          <div className={`p-1 rounded-md ${status.bgColor}`}>
+            <Icon className={`w-3 h-3 ${status.color}`} />
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-0.5">
             {status.pulse && (
               <div className="relative">
-                <div className={`w-2 h-2 rounded-full ${status.color.replace('text-', 'bg-')}`}></div>
-                <div className={`absolute inset-0 w-2 h-2 rounded-full ${status.color.replace('text-', 'bg-')} animate-pulse-ring`}></div>
+                <div className={`w-1 h-1 rounded-full ${status.color.replace('text-', 'bg-')}`}></div>
+                <div className={`absolute inset-0 w-1 h-1 rounded-full ${status.color.replace('text-', 'bg-')} animate-pulse-ring`}></div>
               </div>
             )}
-            <Badge variant="outline" className={`${status.bgColor} ${status.color} ${status.borderColor}`}>
-              <StatusIcon className="w-3 h-3 mr-1" />
+            <Badge variant="outline" className={`text-[10px] px-1 py-0.5 ${status.bgColor} ${status.color} ${status.borderColor}`}>
+              <StatusIcon className="w-2 h-2 mr-0.5" />
               {status.label}
             </Badge>
           </div>
         </div>
 
-        <h4 className="font-semibold text-gray-900 mb-1">{source.name}</h4>
-        <p className="text-xs text-gray-500 mb-3 line-clamp-2">{source.description}</p>
+        <h4 className="font-semibold text-gray-900 mb-0.5 text-xs leading-tight">{source.name}</h4>
+        <p className="text-xs text-gray-500 mb-1 line-clamp-2">{source.description}</p>
 
-        <div className="space-y-2 mb-3">
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-500">Resolution</span>
-            <span className="font-medium text-gray-900">{source.resolution}</span>
+        <div className="space-y-0.5 mb-1">
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-gray-500 text-[10px]">Res</span>
+            <span className="font-medium text-gray-900 text-[10px]">{source.resolution}</span>
           </div>
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-500">Revisit</span>
-            <span className="font-medium text-gray-900">{source.revisitTime}</span>
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-gray-500 text-[10px]">Revisit</span>
+            <span className="font-medium text-gray-900 text-[10px]">{source.revisitTime}</span>
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-          <div className="flex items-center gap-1.5 text-xs text-gray-500">
-            <Clock className="w-3.5 h-3.5" />
-            <span>{source.lastUpdate}</span>
+        <div className="flex items-center justify-between pt-1 border-t border-gray-100">
+          <div className="flex items-center gap-0.5 text-xs text-gray-500">
+            <Clock className="w-2 h-2" />
+            <span className="text-[10px]">{source.lastUpdate}</span>
           </div>
-          <ChevronRight className="w-4 h-4 text-gray-400" />
+          <ChevronRight className="w-2.5 h-2.5 text-gray-400" />
         </div>
       </Card>
     </div>
@@ -198,7 +198,7 @@ export function SatelliteSources() {
       </div>
 
       {/* Satellite Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
         {satelliteSources.map((source, index) => (
           <SatelliteCard
             key={source.id}

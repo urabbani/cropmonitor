@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { MapContainer, TileLayer, Polygon, Popup, LayerGroup, CircleMarker, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { 
@@ -42,12 +42,12 @@ function MapBoundsFitter() {
   const map = useMap();
   
   useEffect(() => {
-    // Fit to Sindh Province bounds
-    const sindhBounds = L.latLngBounds(
-      [23.7, 66.9], // Southwest
-      [28.5, 71.2]  // Northeast
+    // Fit to Eastern Province bounds
+    const easternProvinceBounds = L.latLngBounds(
+      [25.5, 49.0], // Southwest
+      [27.5, 51.0]  // Northeast
     );
-    map.fitBounds(sindhBounds, { padding: [20, 20] });
+    map.fitBounds(easternProvinceBounds, { padding: [20, 20] });
   }, [map]);
   
   return null;
@@ -66,10 +66,10 @@ function getNDVIColor(ndvi: number): string {
 // Crop type colors
 function getCropColor(cropType: string): string {
   const colors: Record<string, string> = {
+    'Dates': '#d4a574',
     'Wheat': '#eab308',
-    'Rice': '#22d3ee',
-    'Cotton': '#e2e8f0',
-    'Sugarcane': '#16a34a'
+    'Tomatoes': '#ef4444',
+    'Alfalfa': '#86efac'
   };
   return colors[cropType] || '#6b7280';
 }
@@ -84,7 +84,7 @@ function getHealthBadge(status: string) {
   return configs[status] || { label: 'Unknown', className: 'bg-gray-100 text-gray-700' };
 }
 
-export function GISMap({ onFieldSelect }: GISMapProps) {
+export const GISMap = React.memo(function GISMap({ onFieldSelect }: GISMapProps) {
   const [activeLayers, setActiveLayers] = useState({
     ndvi: true,
     crops: true,
@@ -148,7 +148,7 @@ export function GISMap({ onFieldSelect }: GISMapProps) {
           </div>
           <div>
             <h3 className="font-semibold text-gray-900">GIS Map View</h3>
-            <p className="text-xs text-gray-500">Sindh Province, Pakistan</p>
+            <p className="text-xs text-gray-500">Eastern Province, Saudi Arabia</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -257,10 +257,10 @@ export function GISMap({ onFieldSelect }: GISMapProps) {
                 <h4 className="text-sm font-semibold text-gray-700 mb-3">Crop Types</h4>
                 <div className="space-y-2">
                   {[
+                    { name: 'Dates', color: '#d4a574' },
                     { name: 'Wheat', color: '#eab308' },
-                    { name: 'Rice', color: '#22d3ee' },
-                    { name: 'Cotton', color: '#e2e8f0', border: true },
-                    { name: 'Sugarcane', color: '#16a34a' }
+                    { name: 'Tomatoes', color: '#ef4444' },
+                    { name: 'Alfalfa', color: '#86efac' }
                   ].map((crop) => (
                     <div key={crop.name} className="flex items-center gap-2">
                       <div 
@@ -292,8 +292,8 @@ export function GISMap({ onFieldSelect }: GISMapProps) {
         {/* Map Container */}
         <div className="flex-1 relative">
           <MapContainer
-            center={[26.5, 68.8]}
-            zoom={7}
+            center={[26.5, 50.0]}
+            zoom={8}
             className="h-[500px] lg:h-[600px] w-full"
             ref={mapRef}
           >
@@ -464,4 +464,4 @@ export function GISMap({ onFieldSelect }: GISMapProps) {
       </div>
     </Card>
   );
-}
+});

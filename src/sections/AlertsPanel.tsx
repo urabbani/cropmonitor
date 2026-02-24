@@ -72,13 +72,13 @@ function formatTimestamp(timestamp: string): string {
   return date.toLocaleDateString();
 }
 
-function AlertCard({ 
-  alert, 
-  onDismiss, 
+function AlertCard({
+  alert,
+  onDismiss,
   onRead,
-  onClick 
-}: { 
-  alert: Alert; 
+  onClick
+}: {
+  alert: Alert;
   onDismiss: () => void;
   onRead: () => void;
   onClick: () => void;
@@ -87,9 +87,9 @@ function AlertCard({
   const Icon = config.icon;
 
   return (
-    <div 
+    <div
       className={`
-        relative p-4 rounded-xl border transition-all cursor-pointer
+        group relative p-2.5 rounded-lg border transition-all cursor-pointer
         ${alert.read ? 'bg-gray-50 border-gray-100' : `${config.bgColor} ${config.borderColor}`}
         hover:shadow-md
       `}
@@ -99,35 +99,35 @@ function AlertCard({
       }}
     >
       {!alert.read && (
-        <div className={`absolute top-4 right-4 w-2 h-2 rounded-full ${config.color.replace('text-', 'bg-')}`} />
+        <div className={`absolute top-2 right-2 w-1.5 h-1.5 rounded-full ${config.color.replace('text-', 'bg-')}`} />
       )}
-      
-      <div className="flex items-start gap-3 pr-6">
-        <div className={`p-2 rounded-lg ${config.bgColor}`}>
-          <Icon className={`w-4 h-4 ${config.color}`} />
+
+      <div className="flex items-start gap-2 pr-4">
+        <div className={`p-1.5 rounded ${config.bgColor} shrink-0`}>
+          <Icon className={`w-3.5 h-3.5 ${config.color}`} />
         </div>
-        
+
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
-            <Badge variant="outline" className={`text-xs ${config.badgeColor}`}>
+          <div className="flex items-center gap-1.5 mb-0.5">
+            <Badge variant="outline" className={`text-[10px] px-1 py-0 ${config.badgeColor}`}>
               {config.label}
             </Badge>
-            <span className="text-xs text-gray-400 flex items-center gap-1">
-              <Clock className="w-3 h-3" />
+            <span className="text-xs text-gray-400 flex items-center gap-0.5">
+              <Clock className="w-2.5 h-2.5" />
               {formatTimestamp(alert.timestamp)}
             </span>
           </div>
-          
-          <h4 className={`font-medium text-sm mb-1 ${alert.read ? 'text-gray-600' : 'text-gray-900'}`}>
+
+          <h4 className={`font-medium text-xs mb-0.5 ${alert.read ? 'text-gray-600' : 'text-gray-900'} leading-tight`}>
             {alert.title}
           </h4>
-          
-          <p className="text-xs text-gray-500 line-clamp-2 mb-2">
+
+          <p className="text-xs text-gray-500 line-clamp-1 mb-1">
             {alert.description}
           </p>
-          
-          <div className="flex items-center gap-1 text-xs text-gray-400">
-            <MapPin className="w-3 h-3" />
+
+          <div className="flex items-center gap-0.5 text-xs text-gray-400">
+            <MapPin className="w-2.5 h-2.5" />
             <span className="truncate">{alert.location}</span>
           </div>
         </div>
@@ -138,9 +138,9 @@ function AlertCard({
           e.stopPropagation();
           onDismiss();
         }}
-        className="absolute top-2 right-2 p-1 rounded hover:bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute top-1.5 right-1.5 p-0.5 rounded hover:bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity"
       >
-        <X className="w-3 h-3 text-gray-400" />
+        <X className="w-2.5 h-2.5 text-gray-400" />
       </button>
     </div>
   );
@@ -177,19 +177,19 @@ export function AlertsPanel({ alerts, onDismiss, onRead }: AlertsPanelProps) {
   const criticalCount = alerts.filter(a => a.severity === 'critical' && !a.read).length;
 
   return (
-    <Card 
+    <Card
       ref={sectionRef}
       className={`border border-gray-200 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
     >
       {/* Header */}
-      <div className="p-4 border-b border-gray-100">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-red-50 rounded-lg">
-              <Bell className="w-5 h-5 text-red-600" />
+      <div className="p-3 border-b border-gray-100">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <div className="p-1.5 bg-red-50 rounded-lg">
+              <Bell className="w-4 h-4 text-red-600" />
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900">Alerts & Notifications</h3>
+              <h3 className="font-semibold text-gray-900 text-sm">Alerts</h3>
               <p className="text-xs text-gray-500">
                 {unreadCount} unread {criticalCount > 0 && `(${criticalCount} critical)`}
               </p>
@@ -209,9 +209,9 @@ export function AlertsPanel({ alerts, onDismiss, onRead }: AlertsPanelProps) {
               key={tab.id}
               onClick={() => setFilter(tab.id as FilterType)}
               className={`
-                flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all
-                ${filter === tab.id 
-                  ? 'bg-gray-900 text-white' 
+                flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium transition-all
+                ${filter === tab.id
+                  ? 'bg-gray-900 text-white'
                   : 'text-gray-600 hover:bg-gray-100'
                 }
               `}
@@ -219,7 +219,7 @@ export function AlertsPanel({ alerts, onDismiss, onRead }: AlertsPanelProps) {
               {tab.label}
               {tab.count > 0 && (
                 <span className={`
-                  px-1.5 py-0.5 rounded-full text-[10px]
+                  px-1 py-0 rounded-full text-[9px]
                   ${filter === tab.id ? 'bg-white/20' : 'bg-gray-200'}
                 `}>
                   {tab.count}
@@ -231,11 +231,11 @@ export function AlertsPanel({ alerts, onDismiss, onRead }: AlertsPanelProps) {
       </div>
 
       {/* Alerts List */}
-      <ScrollArea className="h-[400px]">
-        <div className="p-4 space-y-3">
+      <ScrollArea className="h-[280px]">
+        <div className="p-3 space-y-2">
           {filteredAlerts.length > 0 ? (
             filteredAlerts.map((alert, index) => (
-              <div 
+              <div
                 key={alert.id}
                 className="animate-slide-in"
                 style={{ animationDelay: `${index * 0.05}s` }}
@@ -249,22 +249,22 @@ export function AlertsPanel({ alerts, onDismiss, onRead }: AlertsPanelProps) {
               </div>
             ))
           ) : (
-            <div className="text-center py-8">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CheckCircle2 className="w-8 h-8 text-gray-400" />
+            <div className="text-center py-6">
+              <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <CheckCircle2 className="w-6 h-6 text-gray-400" />
               </div>
-              <p className="text-gray-500 font-medium">No alerts</p>
-              <p className="text-sm text-gray-400">You're all caught up!</p>
+              <p className="text-sm text-gray-500">No alerts</p>
+              <p className="text-xs text-gray-400">You're all caught up!</p>
             </div>
           )}
         </div>
       </ScrollArea>
 
       {/* Footer */}
-      <div className="p-4 border-t border-gray-100">
-        <Button variant="outline" className="w-full text-sm">
+      <div className="p-3 border-t border-gray-100">
+        <Button variant="outline" className="w-full text-xs h-8">
           View All Alerts
-          <ExternalLink className="w-4 h-4 ml-2" />
+          <ExternalLink className="w-3 h-3 ml-1" />
         </Button>
       </div>
 
@@ -282,7 +282,7 @@ export function AlertsPanel({ alerts, onDismiss, onRead }: AlertsPanelProps) {
                     })()}
                   </div>
                   <div>
-                    <DialogTitle className="text-lg">{selectedAlert.title}</DialogTitle>
+                    <DialogTitle className="text-base">{selectedAlert.title}</DialogTitle>
                     <DialogDescription>
                       <div className="flex items-center gap-2 mt-1">
                         <Badge variant="outline" className={severityConfig[selectedAlert.severity].badgeColor}>
@@ -317,10 +317,10 @@ export function AlertsPanel({ alerts, onDismiss, onRead }: AlertsPanelProps) {
                 )}
 
                 <div className="flex gap-2 pt-4">
-                  <Button className="flex-1 bg-primary-medium hover:bg-primary-dark">
+                  <Button className="flex-1 bg-primary-medium hover:bg-primary-dark text-sm">
                     View on Map
                   </Button>
-                  <Button variant="outline" className="flex-1">
+                  <Button variant="outline" className="flex-1 text-sm">
                     Mark as Resolved
                   </Button>
                 </div>

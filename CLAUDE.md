@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Sindh CropWatch** is a React-based agricultural monitoring dashboard for the Sindh province of Pakistan. It provides GIS visualization, satellite data integration, crop health monitoring, and real-time alerts for agricultural management.
+**Saudi AgriDrought Warning System (SAWS)** is a React-based agricultural drought monitoring dashboard for the Eastern Province of Saudi Arabia. It provides GIS visualization, satellite data integration, crop health monitoring, and real-time alerts for agricultural management.
 
 ## Development Commands
 
@@ -116,7 +116,7 @@ Comprehensive TypeScript interfaces in `/src/types/index.ts` cover:
 ### Design System
 
 Custom color palette in `App.css`:
-- Agricultural crop colors: wheat (yellow), rice (cyan), cotton (gray/white), sugarcane (green)
+- Agricultural crop colors: dates (desert gold), wheat (yellow), tomatoes (red), alfalfa (light green)
 - NDVI gradient scale for vegetation health mapping
 - Dark mode CSS variables for theming
 - Custom animations defined in Tailwind config
@@ -227,3 +227,33 @@ toast.error('Failed to load data');
 ## Date Reference
 
 Current date context: February 2026
+
+## OpenCode Delegation
+
+OpenCode is available for delegating coding tasks. Use when you want Claude to hand off code writing/execution to an autonomous agent.
+
+**Configuration:**
+- Binary: `/home/umair/.opencode/bin/opencode`
+- Model: `ollama/qwen3-coder-next:q4_K_M`
+- Wrapper: `~/.local/bin/opencode-delegate`
+
+**Usage via Bash:**
+```bash
+# Direct command
+opencode -m ollama/qwen3-coder-next:q4_K_M --dir /mnt/d/CropWAtch run "<prompt>"
+
+# Via wrapper (works in any directory)
+opencode-delegate "<prompt>"
+```
+
+**When to use OpenCode:**
+- Complex refactoring tasks
+- Multi-file changes
+- Autonomous code generation requiring file system access
+- Tasks where a specialized coding agent would be more efficient
+
+**How Claude should invoke it:**
+When user asks to delegate to OpenCode, use Bash tool with:
+```bash
+~/.local/bin/opencode-delegate "<detailed task description>"
+```

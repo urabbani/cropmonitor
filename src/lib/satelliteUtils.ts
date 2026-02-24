@@ -1,5 +1,7 @@
 import type { VegetationIndexConfig } from '@/types';
 
+console.log('Satellite utilities module loaded');
+
 // Vegetation Index Configurations
 export const vegetationIndices: VegetationIndexConfig[] = [
   {
@@ -12,10 +14,10 @@ export const vegetationIndices: VegetationIndexConfig[] = [
     colorScale: [
       { value: -0.2, color: '#8b4513', label: 'Water/Bare' },
       { value: 0.0, color: '#d2b48c', label: 'Sparse' },
-      { value: 0.3, color: '#ffffcc', label: 'Low' },
-      { value: 0.5, color: '#c6e090', label: 'Moderate' },
-      { value: 0.7, color: '#38a800', label: 'Healthy' },
-      { value: 1.0, color: '#006100', label: 'Dense' }
+      { value: 0.3, color: '#f4a460', label: 'Low' },
+      { value: 0.5, color: '#e8c4a0', label: 'Moderate' },
+      { value: 0.7, color: '#d4a574', label: 'Healthy' },
+      { value: 1.0, color: '#c4956a', label: 'Dense' }
     ]
   },
   {
@@ -236,19 +238,21 @@ export function calculateIndexValue(indexId: string, bands: Record<string, numbe
       if (nir + red === 0) return -1;
       return (nir - red) / (nir + red);
 
-    case 'evi':
+    case 'evi': {
       const denominator = nir + 6 * red - 7.5 * blue + 1;
       if (denominator === 0) return -1;
       return 2.5 * ((nir - red) / denominator);
+    }
 
     case 'ndwi':
       if (green + nir === 0) return -1;
       return (green - nir) / (green + nir);
 
-    case 'savi':
+    case 'savi': {
       const saviDenom = nir + red + 0.5;
       if (saviDenom === 0) return -1;
       return ((nir - red) / saviDenom) * 1.5;
+    }
 
     case 'msi':
       if (nir === 0) return 3;
@@ -262,10 +266,11 @@ export function calculateIndexValue(indexId: string, bands: Record<string, numbe
       if (nir + green === 0) return -1;
       return (nir - green) / (nir + green);
 
-    case 'lai':
+    case 'lai': {
       const ndvi = nir + red === 0 ? 0 : (nir - red) / (nir + red);
       // LAI approximation from NDVI
       return Math.max(0, Math.min(7, ndvi * 6));
+    }
 
     default:
       return 0;

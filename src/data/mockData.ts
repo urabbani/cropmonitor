@@ -61,36 +61,36 @@ export const kpiData: KPIData[] = [
 // Crop Types Data
 export const cropTypes: CropType[] = [
   {
-    id: 'wheat',
-    name: 'Wheat',
-    color: '#eab308',
+    id: 'dates',
+    name: 'Dates',
+    color: '#d4a574',
     area: 985000,
     healthScore: 82,
     trend: 2.5
   },
   {
-    id: 'rice',
-    name: 'Rice',
-    color: '#22d3ee',
-    area: 720000,
+    id: 'wheat',
+    name: 'Wheat',
+    color: '#eab308',
+    area: 520000,
     healthScore: 71,
     trend: -1.8
   },
   {
-    id: 'cotton',
-    name: 'Cotton',
-    color: '#e2e8f0',
-    area: 580000,
-    healthScore: 65,
-    trend: -3.2
+    id: 'tomatoes',
+    name: 'Tomatoes',
+    color: '#ef4444',
+    area: 280000,
+    healthScore: 75,
+    trend: 3.2
   },
   {
-    id: 'sugarcane',
-    name: 'Sugarcane',
-    color: '#16a34a',
-    area: 555000,
+    id: 'alfalfa',
+    name: 'Alfalfa',
+    color: '#86efac',
+    area: 355000,
     healthScore: 89,
-    trend: 4.1
+    trend: 1.5
   }
 ];
 
@@ -159,48 +159,48 @@ export const alerts: Alert[] = [
     id: '1',
     severity: 'critical',
     title: 'High Water Stress Detected',
-    description: 'NDVI drop >20% observed in wheat fields. Immediate irrigation recommended.',
-    location: 'District: Hyderabad, Tehsil: Latifabad',
+    description: 'NDVI drop >20% observed in date palm plantations. Immediate irrigation recommended.',
+    location: 'District: Dammam, Al Hamra District',
     timestamp: '2025-01-26T14:30:00Z',
     read: false,
-    coordinates: [25.3960, 68.3578]
+    coordinates: [26.4200, 50.0830]
   },
   {
     id: '2',
     severity: 'critical',
     title: 'Severe NDVI Decline',
-    description: 'Rice paddies showing significant vegetation stress. Possible pest infestation.',
-    location: 'District: Larkana, Tehsil: Dokri',
+    description: 'Tomato greenhouses showing significant vegetation stress. Check irrigation systems.',
+    location: 'District: Al Hofuf, Al-Ahsa Oasis',
     timestamp: '2025-01-26T10:15:00Z',
     read: false,
-    coordinates: [27.5612, 68.2159]
+    coordinates: [25.3550, 49.5850]
   },
   {
     id: '3',
     severity: 'warning',
     title: 'Moderate Drought Conditions',
-    description: 'Soil moisture levels below threshold in northern Sindh regions.',
-    location: 'District: Sukkur, Khairpur',
+    description: 'Soil moisture levels below threshold in northern regions.',
+    location: 'District: Al Jubail, Industrial Zone',
     timestamp: '2025-01-25T16:45:00Z',
     read: true,
-    coordinates: [27.7052, 68.8574]
+    coordinates: [26.9900, 49.6600]
   },
   {
     id: '4',
     severity: 'warning',
     title: 'Soil Salinity Increase',
     description: '8 fields showing elevated salinity indices. Recommend soil testing.',
-    location: 'District: Badin, Tehsil: Matli',
+    location: 'District: Qatif, Coastal Area',
     timestamp: '2025-01-25T09:20:00Z',
     read: true,
-    coordinates: [24.8142, 68.8372]
+    coordinates: [26.5100, 50.0500]
   },
   {
     id: '5',
     severity: 'info',
     title: 'New Imagery Available',
     description: 'Fresh Sentinel-2 imagery covering entire province now available.',
-    location: 'Sindh Province',
+    location: 'Eastern Province',
     timestamp: '2025-01-26T08:00:00Z',
     read: true
   },
@@ -208,8 +208,8 @@ export const alerts: Alert[] = [
     id: '6',
     severity: 'info',
     title: 'Wheat Harvest Season Approaching',
-    description: 'Southern districts entering optimal harvest window.',
-    location: 'Districts: Hyderabad, Mirpurkhas',
+    description: 'Coastal districts entering optimal harvest window.',
+    location: 'Districts: Dammam, Al Khobar',
     timestamp: '2025-01-24T11:00:00Z',
     read: true
   }
@@ -219,20 +219,20 @@ export const alerts: Alert[] = [
 export const sampleFields: FieldData[] = [
   {
     id: 'field-001',
-    name: 'Field HYD-2847',
+    name: 'Field DAM-2847',
     coordinates: [
-      [25.3960, 68.3578],
-      [25.3980, 68.3578],
-      [25.3980, 68.3600],
-      [25.3960, 68.3600]
+      [26.4180, 50.0800],
+      [26.4200, 50.0800],
+      [26.4200, 50.0830],
+      [26.4180, 50.0830]
     ],
-    center: [25.3970, 68.3589],
+    center: [26.4190, 50.0815],
     area: 12.5,
-    cropType: 'Wheat',
+    cropType: 'Dates',
     ndvi: 0.72,
     healthStatus: 'moderate',
     plantingDate: '2024-11-15',
-    expectedHarvest: '2025-04-20',
+    expectedHarvest: '2025-09-20',
     yieldEstimate: 4.2,
     waterStressIndex: 0.35,
     soilMoisture: 42,
@@ -240,20 +240,20 @@ export const sampleFields: FieldData[] = [
   },
   {
     id: 'field-002',
-    name: 'Field LAR-1932',
+    name: 'Field HOF-1932',
     coordinates: [
-      [27.5612, 68.2159],
-      [27.5635, 68.2159],
-      [27.5635, 68.2185],
-      [27.5612, 68.2185]
+      [25.3530, 49.5830],
+      [25.3550, 49.5830],
+      [25.3550, 49.5850],
+      [25.3530, 49.5850]
     ],
-    center: [27.5624, 68.2172],
+    center: [25.3540, 49.5840],
     area: 18.3,
-    cropType: 'Rice',
+    cropType: 'Wheat',
     ndvi: 0.45,
     healthStatus: 'stressed',
-    plantingDate: '2024-07-10',
-    expectedHarvest: '2025-02-15',
+    plantingDate: '2024-11-10',
+    expectedHarvest: '2025-04-15',
     yieldEstimate: 3.1,
     waterStressIndex: 0.22,
     soilMoisture: 28,
@@ -261,20 +261,20 @@ export const sampleFields: FieldData[] = [
   },
   {
     id: 'field-003',
-    name: 'Field SKR-4521',
+    name: 'Field JUB-4521',
     coordinates: [
-      [27.7052, 68.8574],
-      [27.7075, 68.8574],
-      [27.7075, 68.8600],
-      [27.7052, 68.8600]
+      [26.9880, 49.6580],
+      [26.9900, 49.6580],
+      [26.9900, 49.6600],
+      [26.9880, 49.6600]
     ],
-    center: [27.7064, 68.8587],
+    center: [26.9890, 49.6590],
     area: 25.7,
-    cropType: 'Sugarcane',
+    cropType: 'Alfalfa',
     ndvi: 0.85,
     healthStatus: 'healthy',
-    plantingDate: '2024-09-01',
-    expectedHarvest: '2025-12-01',
+    plantingDate: '2024-10-01',
+    expectedHarvest: '2025-06-01',
     yieldEstimate: 78.5,
     waterStressIndex: 0.78,
     soilMoisture: 65,
@@ -282,20 +282,20 @@ export const sampleFields: FieldData[] = [
   },
   {
     id: 'field-004',
-    name: 'Field BDN-7823',
+    name: 'Field QAT-7823',
     coordinates: [
-      [24.8142, 68.8372],
-      [24.8165, 68.8372],
-      [24.8165, 68.8398],
-      [24.8142, 68.8398]
+      [26.5080, 50.0480],
+      [26.5100, 50.0480],
+      [26.5100, 50.0500],
+      [26.5080, 50.0500]
     ],
-    center: [24.8154, 68.8385],
+    center: [26.5090, 50.0490],
     area: 15.2,
-    cropType: 'Cotton',
+    cropType: 'Tomatoes',
     ndvi: 0.58,
     healthStatus: 'moderate',
-    plantingDate: '2024-05-20',
-    expectedHarvest: '2025-09-30',
+    plantingDate: '2024-12-01',
+    expectedHarvest: '2025-04-30',
     yieldEstimate: 2.8,
     waterStressIndex: 0.48,
     soilMoisture: 38,
@@ -331,77 +331,77 @@ function generateNDVIHistory(): { date: string; ndvi: number; evi: number; ndwi:
 // Districts Data
 export const districts: DistrictData[] = [
   {
-    id: 'hyderabad',
-    name: 'Hyderabad',
+    id: 'dammam',
+    name: 'Dammam',
     coordinates: [
-      [25.2, 68.2],
-      [25.5, 68.2],
-      [25.5, 68.5],
-      [25.2, 68.5]
+      [26.3, 50.0],
+      [26.5, 50.0],
+      [26.5, 50.2],
+      [26.3, 50.2]
     ],
     totalArea: 285000,
-    cultivatedArea: 245000,
-    cropBreakdown: { wheat: 45, rice: 25, cotton: 20, sugarcane: 10 },
+    cultivatedArea: 145000,
+    cropBreakdown: { dates: 55, wheat: 25, tomatoes: 15, alfalfa: 5 },
     healthScore: 76,
     alerts: 23
   },
   {
-    id: 'larkana',
-    name: 'Larkana',
+    id: 'alkhobar',
+    name: 'Al Khobar',
     coordinates: [
-      [27.4, 68.0],
-      [27.7, 68.0],
-      [27.7, 68.4],
-      [27.4, 68.4]
+      [26.2, 50.1],
+      [26.4, 50.1],
+      [26.4, 50.3],
+      [26.2, 50.3]
     ],
     totalArea: 195000,
-    cultivatedArea: 168000,
-    cropBreakdown: { wheat: 30, rice: 50, cotton: 10, sugarcane: 10 },
+    cultivatedArea: 98000,
+    cropBreakdown: { dates: 45, wheat: 30, tomatoes: 20, alfalfa: 5 },
     healthScore: 71,
     alerts: 31
   },
   {
-    id: 'sukkur',
-    name: 'Sukkur',
+    id: 'hofuf',
+    name: 'Al Hofuf',
     coordinates: [
-      [27.5, 68.7],
-      [27.9, 68.7],
-      [27.9, 69.1],
-      [27.5, 69.1]
+      [25.3, 49.5],
+      [25.5, 49.5],
+      [25.5, 49.7],
+      [25.3, 49.7]
     ],
-    totalArea: 165000,
-    cultivatedArea: 142000,
-    cropBreakdown: { wheat: 40, rice: 20, cotton: 25, sugarcane: 15 },
-    healthScore: 79,
+    totalArea: 420000,
+    cultivatedArea: 285000,
+    cropBreakdown: { dates: 65, wheat: 20, tomatoes: 10, alfalfa: 5 },
+    healthScore: 82,
     alerts: 15
   },
   {
-    id: 'badin',
-    name: 'Badin',
+    id: 'qatif',
+    name: 'Qatif',
     coordinates: [
-      [24.5, 68.6],
-      [24.9, 68.6],
-      [24.9, 69.0],
-      [24.5, 69.0]
+      [26.5, 50.0],
+      [26.6, 50.0],
+      [26.6, 50.1],
+      [26.5, 50.1]
     ],
     totalArea: 210000,
-    cultivatedArea: 185000,
-    cropBreakdown: { wheat: 35, rice: 30, cotton: 25, sugarcane: 10 },
+    cultivatedArea: 155000,
+    cropBreakdown: { dates: 70, wheat: 15, tomatoes: 10, alfalfa: 5 },
     healthScore: 68,
     alerts: 28
   },
   {
-    id: 'mirpurkhas',
-    name: 'Mirpurkhas',
+    id: 'jubail',
+    name: 'Al Jubail',
     coordinates: [
-      [25.3, 68.8],
-      [25.7, 68.8],
-      [25.7, 69.2],
-      [25.3, 69.2]
+      [26.9, 49.6],
+      [27.1, 49.6],
+      [27.1, 49.8],
+      [26.9, 49.8]
     ],
     totalArea: 178000,
-    cultivatedArea: 156000,
-    cropBreakdown: { wheat: 50, rice: 15, cotton: 20, sugarcane: 15 },
+    cultivatedArea: 86000,
+    cropBreakdown: { dates: 40, wheat: 35, tomatoes: 15, alfalfa: 10 },
     healthScore: 81,
     alerts: 12
   }
@@ -440,11 +440,11 @@ export const vegetationIndexData: VegetationIndex[] = [
 // Analytics Data
 export const analyticsData: AnalyticsData = {
   cropAreaTrends: [
-    { year: 2020, wheat: 920000, rice: 680000, cotton: 620000, sugarcane: 480000 },
-    { year: 2021, wheat: 935000, rice: 695000, cotton: 605000, sugarcane: 495000 },
-    { year: 2022, wheat: 950000, rice: 710000, cotton: 590000, sugarcane: 510000 },
-    { year: 2023, wheat: 965000, rice: 715000, cotton: 585000, sugarcane: 530000 },
-    { year: 2024, wheat: 985000, rice: 720000, cotton: 580000, sugarcane: 555000 }
+    { year: 2020, dates: 920000, wheat: 480000, tomatoes: 280000, alfalfa: 350000 },
+    { year: 2021, dates: 935000, wheat: 495000, tomatoes: 290000, alfalfa: 360000 },
+    { year: 2022, dates: 950000, wheat: 510000, tomatoes: 300000, alfalfa: 370000 },
+    { year: 2023, dates: 965000, wheat: 525000, tomatoes: 310000, alfalfa: 380000 },
+    { year: 2024, dates: 985000, wheat: 520000, tomatoes: 280000, alfalfa: 355000 }
   ],
   yieldPredictions: [
     { month: 'Nov', predicted: 3.2, confidence: [2.8, 3.6] },
@@ -477,7 +477,7 @@ export const mapLayers = {
   ]
 };
 
-// Available Satellite Dates for Sindh Province
+// Available Satellite Dates for Eastern Province
 export const availableSatelliteDates = [
   { date: '2024-11-01', sourceId: 'sentinel-2', sourceName: 'Sentinel-2', cloudCover: 5, available: true },
   { date: '2024-11-06', sourceId: 'sentinel-2', sourceName: 'Sentinel-2', cloudCover: 12, available: true },
@@ -535,33 +535,33 @@ export function generateHistogramData(mean: number, stdDev: number): { value: nu
   return histogram;
 }
 
-// Sindh Province bounds for satellite imagery
-export const sindhBounds: [[number, number], [number, number], [number, number], [number, number]] = [
-  [23.7, 66.9],  // Southwest
-  [23.7, 71.2],  // Southeast
-  [28.5, 71.2],  // Northeast
-  [28.5, 66.9]   // Northwest
+// Eastern Province bounds for satellite imagery
+export const easternProvinceBounds: [[number, number], [number, number], [number, number], [number, number]] = [
+  [25.5, 49.0],  // Southwest
+  [25.5, 51.0],  // Southeast
+  [27.5, 51.0],  // Northeast
+  [27.5, 49.0]   // Northwest
 ];
 
 // Regions of interest for detailed analysis
 export const regionsOfInterest = [
   {
-    id: 'indus-delta',
-    name: 'Indus River Delta',
-    bounds: [[23.5, 67.0], [23.5, 68.5], [24.5, 68.5], [24.5, 67.0]] as [[number, number], [number, number], [number, number], [number, number]],
+    id: 'alahsa-oasis',
+    name: 'Al-Ahsa Oasis',
+    bounds: [[25.3, 49.5], [25.3, 49.7], [25.5, 49.7], [25.5, 49.5]] as [[number, number], [number, number], [number, number], [number, number]],
     area: 850000
   },
   {
-    id: 'thar-desert',
-    name: 'Thar Desert Region',
-    bounds: [[24.0, 69.5], [24.0, 71.0], [25.5, 71.0], [25.5, 69.5]] as [[number, number], [number, number], [number, number], [number, number]],
-    area: 1200000
+    id: 'coastal-farms',
+    name: 'Coastal Farming Region',
+    bounds: [[26.3, 50.0], [26.3, 50.3], [26.6, 50.3], [26.6, 50.0]] as [[number, number], [number, number], [number, number], [number, number]],
+    area: 420000
   },
   {
-    id: 'rice-belt',
-    name: 'Rice Cultivation Belt',
-    bounds: [[26.5, 68.0], [26.5, 69.0], [27.5, 69.0], [27.5, 68.0]] as [[number, number], [number, number], [number, number], [number, number]],
-    area: 650000
+    id: 'industrial-zone',
+    name: 'Jubail Agricultural Zone',
+    bounds: [[26.9, 49.6], [26.9, 49.8], [27.1, 49.8], [27.1, 49.6]] as [[number, number], [number, number], [number, number], [number, number]],
+    area: 180000
   }
 ];
 

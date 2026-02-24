@@ -56,7 +56,7 @@ function Sparkline({ data, color }: { data: number[]; color: string }) {
   }).join(' ');
 
   return (
-    <svg className="w-full h-10" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <svg className="w-full h-3" viewBox="0 0 100 100" preserveAspectRatio="none">
       <polyline
         fill="none"
         stroke={color}
@@ -136,34 +136,34 @@ function KPICard({ title, value, unit, trend, trendLabel, icon, sparklineData, s
       `}
       style={{ animationDelay: `${delay * 0.1}s` }}
     >
-      <Card className="p-5 card-hover border border-gray-100">
-        <div className="flex items-start justify-between mb-4">
-          <div className={`p-3 rounded-xl ${statusColors[status]}`}>
-            <Icon className="w-5 h-5" />
+      <Card className="p-2.5 card-hover border border-gray-100">
+        <div className="flex items-start justify-between mb-2">
+          <div className={`p-1.5 rounded-lg ${statusColors[status]}`}>
+            <Icon className="w-3.5 h-3.5" />
           </div>
-          <div className={`flex items-center gap-1 text-sm font-medium ${trendColor}`}>
-            <TrendIcon className="w-4 h-4" />
+          <div className={`flex items-center gap-1 text-xs font-medium ${trendColor}`}>
+            <TrendIcon className="w-3 h-3" />
             <span>{trend > 0 ? '+' : ''}{trend}%</span>
           </div>
         </div>
-        
-        <div className="mb-3">
-          <p className="text-sm text-gray-500 mb-1">{title}</p>
+
+        <div className="mb-2">
+          <p className="text-xs text-gray-500 mb-0.5">{title}</p>
           <div className="flex items-baseline gap-1">
-            <span className="text-2xl lg:text-3xl font-bold text-gray-900">
+            <span className="text-lg lg:text-xl font-bold text-gray-900">
               {displayValue}
             </span>
             <span className="text-sm text-gray-500">{unit}</span>
           </div>
         </div>
-        
-        <div className="mb-3">
-          <Sparkline 
-            data={sparklineData} 
-            color={status === 'positive' ? '#22c55e' : status === 'negative' ? '#ef4444' : status === 'warning' ? '#f59e0b' : '#6b7280'} 
+
+        <div className="mb-2 h-8 overflow-hidden">
+          <Sparkline
+            data={sparklineData}
+            color={status === 'positive' ? '#22c55e' : status === 'negative' ? '#ef4444' : status === 'warning' ? '#f59e0b' : '#6b7280'}
           />
         </div>
-        
+
         <p className="text-xs text-gray-400">{trendLabel}</p>
       </Card>
     </div>
@@ -176,7 +176,7 @@ export function DashboardOverview() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-bold text-gray-900">Dashboard Overview</h2>
-          <p className="text-sm text-gray-500">Real-time crop monitoring across Sindh Province</p>
+          <p className="text-sm text-gray-500">Drought monitoring and early warning across Saudi Arabia</p>
         </div>
         <div className="flex items-center gap-2 text-sm text-gray-500">
           <span>Last updated:</span>
@@ -184,7 +184,7 @@ export function DashboardOverview() {
         </div>
       </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
         {kpiData.map((kpi, index) => (
           <KPICard
             key={kpi.id}

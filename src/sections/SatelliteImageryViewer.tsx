@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { MapContainer, TileLayer, ImageOverlay, useMap } from 'react-leaflet';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -37,8 +37,6 @@ import {
   getColorScaleGradient
 } from '@/lib/satelliteUtils';
 import { Bar, BarChart, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-
-interface SatelliteImageryViewerProps {}
 
 // Map bounds component
 function MapBoundsFitter({ bounds }: { bounds: [[number, number], [number, number], [number, number], [number, number]] }) {
@@ -154,9 +152,9 @@ function ChangeMapChart({ data }: { data: Array<{ category: string; value: numbe
               borderRadius: '8px',
               fontSize: '11px'
             }}
-            formatter={(value: number, name: string, props: any) => {
+            formatter={(value: number, name: string, props: { payload?: { area?: number } }) => {
               if (name === 'value') return [`${value > 0 ? '+' : ''}${value}%`, 'Change'];
-              if (name === 'area') return [`${(props.payload.area / 1000000).toFixed(2)}M ha`, 'Area'];
+              if (name === 'area' && props.payload?.area) return [`${(props.payload.area / 1000000).toFixed(2)}M ha`, 'Area'];
               return [value, name];
             }}
           />
@@ -171,7 +169,7 @@ function ChangeMapChart({ data }: { data: Array<{ category: string; value: numbe
   );
 }
 
-export function SatelliteImageryViewer({}: SatelliteImageryViewerProps) {
+export const SatelliteImageryViewer = React.memo(function SatelliteImageryViewer() {
   const [selectedDate, setSelectedDate] = useState('2025-01-26');
   const [selectedIndex, setSelectedIndex] = useState('ndvi');
   const [viewMode, setViewMode] = useState<'single' | 'comparison'>('single');
@@ -181,11 +179,11 @@ export function SatelliteImageryViewer({}: SatelliteImageryViewerProps) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  const sindhBounds: [[number, number], [number, number], [number, number], [number, number]] = [
-    [23.7, 66.9],
-    [23.7, 71.2],
-    [28.5, 71.2],
-    [28.5, 66.9]
+  const easternProvinceBounds: [[number, number], [number, number], [number, number], [number, number]] = [
+    [25.5, 49.0],
+    [25.5, 51.0],
+    [27.5, 51.0],
+    [27.5, 49.0]
   ];
 
   // Animation on scroll
@@ -437,11 +435,11 @@ export function SatelliteImageryViewer({}: SatelliteImageryViewerProps) {
           {/* Map Area */}
           <div className="flex-1 relative">
             <MapContainer
-              center={[26.5, 68.8]}
-              zoom={7}
+              center={[26.5, 50.0]}
+              zoom={8}
               className="h-[500px] w-full"
             >
-              <MapBoundsFitter bounds={sindhBounds} />
+              <MapBoundsFitter bounds={easternProvinceBounds} />
               <TileLayer
                 attribution="© OpenStreetMap contributors"
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -469,7 +467,7 @@ export function SatelliteImageryViewer({}: SatelliteImageryViewerProps) {
                     </text>
                   </svg>
                 `)}`}
-                bounds={sindhBounds}
+                bounds={easternProvinceBounds}
                 opacity={0.6}
               />
             </MapContainer>
@@ -540,4 +538,4 @@ export function SatelliteImageryViewer({}: SatelliteImageryViewerProps) {
       )}
     </section>
   );
-}
+});

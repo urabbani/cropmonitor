@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { 
-  Satellite, 
-  LayoutDashboard, 
-  Map, 
-  BarChart3, 
-  Bell, 
-  Settings, 
+import {
+  LayoutDashboard,
+  Map,
+  BarChart3,
+  Bell,
+  Settings,
   FileText,
   User,
   ChevronDown,
@@ -45,12 +44,14 @@ export function Header({ activeTab, onTabChange, unreadAlertsCount }: HeaderProp
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary-dark to-primary-medium rounded-xl flex items-center justify-center shadow-md">
-              <Satellite className="w-5 h-5 text-white" />
-            </div>
+            <img
+              src="https://srpsid-dss.gos.pk/design_sheet/images_logo/sid_dss_new.png"
+              alt="Sindh DSS Logo"
+              className="h-10 w-auto object-contain"
+            />
             <div className="hidden sm:block">
-              <h1 className="text-lg font-bold text-gray-900 leading-tight">Sindh CropWatch</h1>
-              <p className="text-xs text-gray-500">Web-GIS Monitoring System</p>
+              <h1 className="text-lg font-bold text-gray-900 leading-tight">Saudi AgriDrought Warning System</h1>
+              <p className="text-xs text-gray-500">(SAWS) - Drought Early Warning</p>
             </div>
           </div>
 
@@ -136,7 +137,7 @@ export function Header({ activeTab, onTabChange, unreadAlertsCount }: HeaderProp
               <DropdownMenuContent align="end" className="w-48">
                 <div className="px-3 py-2 border-b border-gray-100">
                   <p className="font-semibold text-sm">Admin User</p>
-                  <p className="text-xs text-gray-500">admin@sindhcropwatch.pk</p>
+                  <p className="text-xs text-gray-500">admin@saws.sa</p>
                 </div>
                 <DropdownMenuItem className="text-sm cursor-pointer">
                   <User className="w-4 h-4 mr-2" />
