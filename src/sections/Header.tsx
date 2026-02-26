@@ -45,9 +45,9 @@ export function Header({ activeTab, onTabChange, unreadAlertsCount }: HeaderProp
           {/* Logo */}
           <div className="flex items-center gap-3">
             <img
-              src="https://srpsid-dss.gos.pk/design_sheet/images_logo/sid_dss_new.png"
-              alt="Sindh DSS Logo"
-              className="h-10 w-auto object-contain"
+              src="/logo.jpg"
+              alt="SAWS Logo"
+              className="h-14 w-auto object-contain"
             />
             <div className="hidden sm:block">
               <h1 className="text-lg font-bold text-gray-900 leading-tight">Saudi AgriDrought Warning System</h1>
